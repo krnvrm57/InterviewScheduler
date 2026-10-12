@@ -1,0 +1,176 @@
+﻿@using InterviewScheduler.Common;
+@using InterviewScheduler.Models;
+@using System.Configuration;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title -Interview Scheduler</title>
+    <link href="~/Content/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/lib/font-awesome/css/all.min.css" rel="stylesheet" />
+    <link href="~/Content/lib/datatables/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/Content/lib/jquery-datetimepicker/jquery.datetimepicker.css" rel="stylesheet" />
+    <link href="~/Content/css/propeller.min.css" rel="stylesheet" />
+    <link href="~/Content/lib/CustomTagsLib/tagcomplete.css" rel="stylesheet" />
+    <link href="~/Content/css/site.css" rel="stylesheet" />
+
+</head>
+<body class="pace-done">
+    <div id="spinner">
+        <div class="spin"><div id="loader"></div></div>
+    </div>
+    <div id="wrapper">
+        <nav class="navbar-default navbar-static-side" role="navigation">
+
+            <div class="sidebar-collapse">
+                <ul class="nav metismenu pd-10" id="side-menu" style="">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element text-center">
+                            @try
+                            {
+                                if (System.Web.HttpContext.Current.User != null && ((MyPrincipalModel)System.Web.HttpContext.Current.User).User != null)
+                                {
+                                    var userData = ((MyPrincipalModel)System.Web.HttpContext.Current.User).User;
+                                    var userProfileImage = (InterviewScheduler.Models.User)Session["AuthCookieName" + userData.Id.ToString()] != null
+                                        ? ((InterviewScheduler.Models.User)Session["AuthCookieName" + userData.Id.ToString()]).ThumbnailPhoto : null;
+
+
+
+                                    if (System.Web.HttpContext.Current.User != null && ((MyPrincipalModel)System.Web.HttpContext.Current.User).User != null)
+                                    {
+                                        if (userProfileImage != null)
+                                        {
+                                            <img class="rounded-circle" src="data:image/jpeg;base64,@userProfileImage" style="height: 80px; width: 80px;">
+                                        }
+                                        else
+                                        {
+                                            <img class="rounded-circle" width="48px" src="/Content/Img/UserIcon.jpg">
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <img class="rounded-circle" width="48px" src="/Content/img/UserIcon.jpg">
+                                    }
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                <img class="rounded-circle" width="48" src="~/Content/img/UserIcon.jpg">
+                            }
+                            <br /><br />
+                            <a data-toggle="dropdown" class="dropdown-toggle block" href="#">
+                                @try
+                                {
+                                    if (System.Web.HttpContext.Current.User != null && (MyPrincipalModel)System.Web.HttpContext.Current.User != null)
+                                    {
+                                        Logger.LogEntry(Logger.ErrorType.Message, "", "", "", "Layout.aspx " + System.Web.HttpContext.Current.User.Identity.AuthenticationType);
+                                        var data = ((MyPrincipalModel)System.Web.HttpContext.Current.User).User.Name;
+                                        var designation = ((MyPrincipalModel)System.Web.HttpContext.Current.User).User.Designation;
+                                        int length = 24;
+                                        length = @data.Length - 1 > 24 ? 24 : @data.Length;
+                                        <span class=" m-t-xs font-bold">@data.Substring(0, length).ToString()</span><br />
+                                        <span class="text-muted text-xs">@designation <b class="caret"></b></span>
+                                        <p></p>
+                                    }
+                                }
+                                catch
+                                {
+
+                                }
+                            </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a class="dropdown-item" href="/ManageEmployee/ManageProfile">Profile</a></li>
+                                <li class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="/Landing/SignOut">Logout</a></li>
+                            </ul>
+                        </div>
+                        <div class="logo-element">
+                            @try
+                            {
+                                if (System.Web.HttpContext.Current.User != null)
+                                {
+                                    var Int = ((MyPrincipalModel)System.Web.HttpContext.Current.User).User.NameInit;
+                                    <span class="rounded-circle Custom-rounded-circle" style="">@Int</span>
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                <span class="rounded-circle Custom-rounded-circle" style=""></span>
+                            }
+
+                        </div>
+                    </li>
+                    <li id="dashboard" class="active">
+                        <a href="/"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span></a>
+                    </li>
+                    <li id="InterviewScheduler">
+                        <a href="/Task"><i class="fa fa-desktop"></i> <span class="nav-label">Interview Scheduler</span></a>
+                    </li>
+                    <li id="MyTasks">
+                        <a href="/MyTasks"><i class="fa fa-desktop"></i> <span class="nav-label">My Tasks</span></a>
+                    </li>
+                    <li id="ScheduledInterview">
+                        <a href="/ScheduledInterview"><i class="fa fa-desktop"></i> <span class="nav-label">Scheduled Interview</span></a>
+                    </li>
+                    <li id="Panel">
+                        <a href="/Panel"><i class="fa fa-desktop"></i> <span class="nav-label">Manage Panel</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                        <form role="search" class="navbar-form-custom" action="/search_results.html">
+                            @Html.Hidden("__RequestVerificationToken", @Html.AntiForgeryToken())
+
+                            <div class="form-group">
+                            </div>
+                        </form>
+                    </div>
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li style="padding: 20px">
+
+                            <span class="m-r-sm text-muted welcome-message">@("Welcome Karan Verma")</span>
+
+                        </li>
+                        <li>
+                            <a href="/Landing/SignOut">
+                                <i class="fas fa-sign-out-alt"></i> Log out
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            @RenderBody()
+            <div class="footer fixed">
+                <div class="float-right">
+                    <strong> follow us on </strong> <a class="circ"><i class="fab fa-linkedin-in "></i></a> <a class="circ"><i class="fab fa-facebook"></i></a> <a class="circ"><i class="fab fa-twitter"></i></a>
+                </div>
+                <div>
+                    <strong>Copyright</strong> CrimsonLogic <i class="fa fa-copyright"></i> @DateTime.Now.Year.ToString()
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Content/lib/jquery/jquery.min.js"></script>
+    <script src="~/Content/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/Content/lib/popperJS/popper.min.js"></script>
+    <script src="~/Content/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/lib/jquery-datetimepicker/jquery.datetimepicker.full.js"></script>
+    <script src="~/Content/js/Common/metisMenu.js"></script>
+    <script src="~/Content/js/Common/NavbarStyling.js"></script>
+    <script src="~/Content/js/Common/slimscroll.min.js"></script>
+    <script src="~/Content/js/Common/AjaxUnauthrizedHandler.js"></script>
+    <script src="~/Content/js/Common/LoaderHandler.js"></script>
+    <script src="~/Content/js/Common/style.js?v=@DateTime.Now"></script>
+    <script src="~/Content/js/Common/DragDropUI.js?v=@DateTime.Now"></script>
+    <script src="~/Content/lib/datatables/js/jquery.dataTables.js"></script>
+    <script src="~/Content/lib/datatables/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/Content/lib/CustomTagsLib/tagcomplete.js"></script>
+    @RenderSection("scripts", required: false);
+</body>
+</html>

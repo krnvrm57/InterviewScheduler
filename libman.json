@@ -1,0 +1,41 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "jquery@3.7.0",
+      "destination": "Content/lib/jquery/"
+    },
+    {
+      "library": "bootstrap@4.6.0",
+      "destination": "Content/lib/bootstrap/"
+    },
+    {
+      "library": "font-awesome@6.4.0",
+      "destination": "Content/lib/font-awesome/"
+    },
+    {
+      "library": "datatables@1.10.21",
+      "destination": "Content/lib/datatables/"
+    },
+    {
+      "library": "jquery-datetimepicker@2.5.20",
+      "destination": "Content/lib/jquery-datetimepicker/"
+    },
+    {
+      "library": "bootstrap-tagsinput@0.8.0",
+      "destination": "Content/lib/bootstrap-tagsinput/",
+      "files": [
+        "bootstrap-tagsinput-typeahead.css",
+        "bootstrap-tagsinput.css",
+        "bootstrap-tagsinput.js",
+        "bootstrap-tagsinput.min.js",
+        "bootstrap-tagsinput.min.js.map"
+      ]
+    },
+    {
+      "library": "typeahead.js@0.11.0",
+      "destination": "Content/lib/typeahead.js/"
+    }
+  ]
+}

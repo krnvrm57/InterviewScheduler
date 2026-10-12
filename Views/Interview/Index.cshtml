@@ -1,0 +1,38 @@
+﻿<div class="border-bottom white-bg dashboard-header mb-1 headerborder">
+    <h4>Interview Scheduler</h4>
+</div>
+<div class="border-bottom white-bg dashboard-header mb-5">
+    <div class="row">
+        <div class="col-sm-6 mb-3">
+            <a id="btnSheduleNewInterview" href="#" onclick="return false;" class="btn btn-secondary">Schedule Interview</a>
+        </div>
+        <div class="col-sm-6 mb-3 text-right">
+            <a id="infoIcon" class="fa fa-circle-info fa-2x"></a>
+        </div>
+        <div class="col-sm-12">
+            <table id="Tasks" class="display table  table-striped">
+                <thead>
+                    <tr>
+                        <th>SN</th>
+                        <th>TaskNumber</th>
+                        <th>Title</th>
+                        <th>Assigned to Panel</th>
+                        <th>Technology</th>
+                        <th>Position</th>
+                        <th>Interview Round</th>
+                        <th>Status</th>
+                        <th>CreatedDate</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            </table>
+            <div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="TaskModal"></div>
+@section scripts
+{
+    <script src="~/Content/js/App/Interview/Interview.js?v=@DateTime.Now"></script>
+}

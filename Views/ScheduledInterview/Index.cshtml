@@ -1,0 +1,43 @@
+﻿
+<div class="border-bottom white-bg dashboard-header mb-1 headerborder">
+    <div class="row">
+        <div class="col-sm-6">
+            <h5>My Tasks</h5>
+        </div>
+        <div class="col-sm-6 text-right">
+            <a id="infoIcon" class="fa fa-circle-info fa-2x"></a>
+        </div>
+    </div>
+</div>
+<div class="border-bottom white-bg dashboard-header mb-5">
+    <div class="row">
+
+        <div class="col-sm-12">
+            <table id="Tasks" class="display table  table-striped">
+                <thead>
+                    <tr>
+                        <th>SN</th>
+                        <th>TaskNumber</th>
+                        <th>Title</th>
+                        <th>Technology</th>
+                        <th>Position</th>
+                        <th>Interview Round</th>
+                        <th>scheduled on</th>
+                        <th>Status</th>
+                        <th>CreatedDate</th>
+                        <th>Created By</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            </table>
+            <div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="MyTaskModal"></div>
+@section scripts
+{
+    <script src="~/Content/js/App/ScheduleInterview/ScheduleInterview.js?v=@DateTime.Now"></script>
+}
+

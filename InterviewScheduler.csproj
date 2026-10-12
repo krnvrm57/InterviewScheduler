@@ -1,0 +1,679 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{721C1A61-7957-491F-89FE-03E6D6F33CDD}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>InterviewScheduler</RootNamespace>
+    <AssemblyName>InterviewScheduler</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44323</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ADServices\AD.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Common\Mapper.cs" />
+    <Compile Include="Controllers\InterviewController.cs" />
+    <Compile Include="Controllers\LandingController.cs" />
+    <Compile Include="Controllers\ScheduledInterviewController.cs" />
+    <Compile Include="Filters\AccessControlAttribute.cs" />
+    <Compile Include="Filters\JsonNetResult.cs" />
+    <Compile Include="Filters\JsonResponse.cs" />
+    <Compile Include="Models\DocumentModel.cs" />
+    <Compile Include="Models\ExceptionModel.cs" />
+    <Compile Include="Models\InterviewRoundModel.cs" />
+    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\MyPrincipalModel.cs" />
+    <Compile Include="Models\SkillModel.cs" />
+    <Compile Include="Controllers\CommonController.cs" />
+    <Compile Include="Controllers\MyTasksController.cs" />
+    <Compile Include="Controllers\PanelController.cs" />
+    <Compile Include="Models\EmployeeModel.cs" />
+    <Compile Include="Models\PanelModel.cs" />
+    <Compile Include="Models\SuggestedInterviewSlotsModel.cs" />
+    <Compile Include="Models\CreateTaskModel.cs" />
+    <Compile Include="Models\AllocationPanelModel.cs" />
+    <Compile Include="Common\Constant.cs" />
+    <Compile Include="Common\CrimsonDBHandle.cs" />
+    <Compile Include="Common\Logger.cs" />
+    <Compile Include="Common\Utility.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ActionHistoryModel.cs" />
+    <Compile Include="Models\CandidateProfileModel.cs" />
+    <Compile Include="Models\ErrorViewModel.cs" />
+    <Compile Include="Models\PositionModel.cs" />
+    <Compile Include="Models\TaskActionsModel.cs" />
+    <Compile Include="Models\TaskHistoryModel.cs" />
+    <Compile Include="Models\TaskModel.cs" />
+    <Compile Include="Models\TaskWorkFlowModel.cs" />
+    <Compile Include="Models\TechnologyModel.cs" />
+    <Compile Include="Models\WorkFlowModel.cs" />
+    <Compile Include="Models\WorkFlowStateModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\css\Multiselect.css" />
+    <Content Include="Content\css\propeller.min.css" />
+    <Content Include="Content\css\loginPage.css" />
+    <Content Include="Content\css\site.css" />
+    <Content Include="Content\img\bg.png" />
+    <Content Include="Content\img\CrimsonLogic-logo.png" />
+    <Content Include="Content\img\green.png" />
+    <Content Include="Content\img\header-profile.png" />
+    <Content Include="Content\img\UserIcon.jpg" />
+    <Content Include="Content\js\App\Interview\Interview.js" />
+    <Content Include="Content\js\App\ScheduleInterview\ScheduleInterview.js" />
+    <Content Include="Content\js\App\MyTask\ActionOnTask.js" />
+    <Content Include="Content\js\App\MyTask\MyTask.js" />
+    <Content Include="Content\js\App\Panel\Panel.js" />
+    <Content Include="Content\js\App\Task\CreateTask.js" />
+    <Content Include="Content\js\App\Task\Task.js" />
+    <Content Include="Content\js\Common\AjaxUnauthrizedHandler.js" />
+    <Content Include="Content\js\Common\CommonMethods.js" />
+    <Content Include="Content\js\Common\LoaderHandler.js" />
+    <Content Include="Content\js\Common\metisMenu.js" />
+    <Content Include="Content\js\Common\NavbarStyling.js" />
+    <Content Include="Content\js\Common\DragDropUI.js" />
+    <Content Include="Content\js\Common\slimscroll.min.js" />
+    <Content Include="Content\js\Common\steps.js" />
+    <Content Include="Content\js\Common\style.js" />
+    <Content Include="Content\lib\bootstrap-tour\bootstrap-tour.min.js" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\lib\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="Content\lib\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="Content\lib\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\lib\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\lib\CustomTagsLib\tagcomplete.css" />
+    <Content Include="Content\lib\CustomTagsLib\tagcomplete.js" />
+    <Content Include="Content\lib\CustomTagsLib\tagcomplete.material.css" />
+    <Content Include="Content\lib\CustomTagsLib\tagcomplete.material.min.css" />
+    <Content Include="Content\lib\CustomTagsLib\tagcomplete.min.css" />
+    <Content Include="Content\lib\CustomTagsLib\tagcomplete.min.js" />
+    <Content Include="Content\lib\datatables\css\dataTables.bootstrap.css" />
+    <Content Include="Content\lib\datatables\css\dataTables.bootstrap.min.css" />
+    <Content Include="Content\lib\datatables\css\dataTables.bootstrap4.css" />
+    <Content Include="Content\lib\datatables\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\lib\datatables\css\dataTables.foundation.css" />
+    <Content Include="Content\lib\datatables\css\dataTables.foundation.min.css" />
+    <Content Include="Content\lib\datatables\css\dataTables.jqueryui.css" />
+    <Content Include="Content\lib\datatables\css\dataTables.jqueryui.min.css" />
+    <Content Include="Content\lib\datatables\css\dataTables.material.css" />
+    <Content Include="Content\lib\datatables\css\dataTables.material.min.css" />
+    <Content Include="Content\lib\datatables\css\dataTables.semanticui.css" />
+    <Content Include="Content\lib\datatables\css\dataTables.semanticui.min.css" />
+    <Content Include="Content\lib\datatables\css\dataTables.uikit.css" />
+    <Content Include="Content\lib\datatables\css\dataTables.uikit.min.css" />
+    <Content Include="Content\lib\datatables\css\jquery.dataTables.css" />
+    <Content Include="Content\lib\datatables\css\jquery.dataTables.min.css" />
+    <Content Include="Content\lib\datatables\css\jquery.dataTables_themeroller.css" />
+    <Content Include="Content\lib\datatables\css\jquery.dataTables_themeroller.min.css" />
+    <Content Include="Content\lib\datatables\images\sort_asc.png" />
+    <Content Include="Content\lib\datatables\images\sort_asc_disabled.png" />
+    <Content Include="Content\lib\datatables\images\sort_both.png" />
+    <Content Include="Content\lib\datatables\images\sort_desc.png" />
+    <Content Include="Content\lib\datatables\images\sort_desc_disabled.png" />
+    <Content Include="Content\lib\datatables\js\dataTables.bootstrap.js" />
+    <Content Include="Content\lib\datatables\js\dataTables.bootstrap.min.js" />
+    <Content Include="Content\lib\datatables\js\dataTables.bootstrap4.js" />
+    <Content Include="Content\lib\datatables\js\dataTables.bootstrap4.min.js" />
+    <Content Include="Content\lib\datatables\js\dataTables.dataTables.js" />
+    <Content Include="Content\lib\datatables\js\dataTables.dataTables.min.js" />
+    <Content Include="Content\lib\datatables\js\dataTables.foundation.js" />
+    <Content Include="Content\lib\datatables\js\dataTables.foundation.min.js" />
+    <Content Include="Content\lib\datatables\js\dataTables.jqueryui.js" />
+    <Content Include="Content\lib\datatables\js\dataTables.jqueryui.min.js" />
+    <Content Include="Content\lib\datatables\js\dataTables.material.js" />
+    <Content Include="Content\lib\datatables\js\dataTables.material.min.js" />
+    <Content Include="Content\lib\datatables\js\dataTables.semanticui.js" />
+    <Content Include="Content\lib\datatables\js\dataTables.semanticui.min.js" />
+    <Content Include="Content\lib\datatables\js\dataTables.uikit.js" />
+    <Content Include="Content\lib\datatables\js\dataTables.uikit.min.js" />
+    <Content Include="Content\lib\datatables\js\jquery.dataTables.js" />
+    <Content Include="Content\lib\datatables\js\jquery.dataTables.min.js" />
+    <Content Include="Content\lib\bootstrap-Multiselect\css\bootstrap-multiselect.css" />
+    <Content Include="Content\lib\bootstrap-Multiselect\css\bootstrap-multiselect.min.css" />
+    <Content Include="Content\lib\bootstrap-Multiselect\js\bootstrap-multiselect.js" />
+    <Content Include="Content\lib\bootstrap-Multiselect\js\bootstrap-multiselect.min.js" />
+    <Content Include="Content\lib\font-awesome\css\all.css" />
+    <Content Include="Content\lib\font-awesome\css\all.min.css" />
+    <Content Include="Content\lib\font-awesome\css\brands.css" />
+    <Content Include="Content\lib\font-awesome\css\brands.min.css" />
+    <Content Include="Content\lib\font-awesome\css\fontawesome.css" />
+    <Content Include="Content\lib\font-awesome\css\fontawesome.min.css" />
+    <Content Include="Content\lib\font-awesome\css\regular.css" />
+    <Content Include="Content\lib\font-awesome\css\regular.min.css" />
+    <Content Include="Content\lib\font-awesome\css\solid.css" />
+    <Content Include="Content\lib\font-awesome\css\solid.min.css" />
+    <Content Include="Content\lib\font-awesome\css\svg-with-js.css" />
+    <Content Include="Content\lib\font-awesome\css\svg-with-js.min.css" />
+    <Content Include="Content\lib\font-awesome\css\v4-font-face.css" />
+    <Content Include="Content\lib\font-awesome\css\v4-font-face.min.css" />
+    <Content Include="Content\lib\font-awesome\css\v4-shims.css" />
+    <Content Include="Content\lib\font-awesome\css\v4-shims.min.css" />
+    <Content Include="Content\lib\font-awesome\css\v5-font-face.css" />
+    <Content Include="Content\lib\font-awesome\css\v5-font-face.min.css" />
+    <Content Include="Content\lib\font-awesome\js\all.js" />
+    <Content Include="Content\lib\font-awesome\js\all.min.js" />
+    <Content Include="Content\lib\font-awesome\js\brands.js" />
+    <Content Include="Content\lib\font-awesome\js\brands.min.js" />
+    <Content Include="Content\lib\font-awesome\js\conflict-detection.js" />
+    <Content Include="Content\lib\font-awesome\js\conflict-detection.min.js" />
+    <Content Include="Content\lib\font-awesome\js\fontawesome.js" />
+    <Content Include="Content\lib\font-awesome\js\fontawesome.min.js" />
+    <Content Include="Content\lib\font-awesome\js\regular.js" />
+    <Content Include="Content\lib\font-awesome\js\regular.min.js" />
+    <Content Include="Content\lib\font-awesome\js\solid.js" />
+    <Content Include="Content\lib\font-awesome\js\solid.min.js" />
+    <Content Include="Content\lib\font-awesome\js\v4-shims.js" />
+    <Content Include="Content\lib\font-awesome\js\v4-shims.min.js" />
+    <Content Include="Content\lib\font-awesome\sprites\brands.svg" />
+    <Content Include="Content\lib\font-awesome\sprites\regular.svg" />
+    <Content Include="Content\lib\font-awesome\sprites\solid.svg" />
+    <Content Include="Content\lib\jquery-datetimepicker\jquery.datetimepicker.css" />
+    <Content Include="Content\lib\jquery-datetimepicker\jquery.datetimepicker.full.js" />
+    <Content Include="Content\lib\jquery-datetimepicker\jquery.datetimepicker.full.min.js" />
+    <Content Include="Content\lib\jquery-datetimepicker\jquery.datetimepicker.js" />
+    <Content Include="Content\lib\jquery-datetimepicker\jquery.datetimepicker.min.css" />
+    <Content Include="Content\lib\jquery-datetimepicker\jquery.datetimepicker.min.js" />
+    <Content Include="Content\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+    <Content Include="Content\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Content\lib\jquery-validation-unobtrusive\LICENSE.txt" />
+    <Content Include="Content\lib\jquery-validation\dist\additional-methods.js" />
+    <Content Include="Content\lib\jquery-validation\dist\additional-methods.min.js" />
+    <Content Include="Content\lib\jquery-validation\dist\jquery.validate.js" />
+    <Content Include="Content\lib\jquery-validation\dist\jquery.validate.min.js" />
+    <Content Include="Content\lib\jquery\jquery.js" />
+    <Content Include="Content\lib\jquery\jquery.min.js" />
+    <Content Include="Content\lib\jquery\jquery.slim.js" />
+    <Content Include="Content\lib\jquery\jquery.slim.min.js" />
+    <Content Include="Content\lib\popperJS\cjs\enums.js" />
+    <Content Include="Content\lib\popperJS\cjs\enums.min.js" />
+    <Content Include="Content\lib\popperJS\cjs\popper-base.js" />
+    <Content Include="Content\lib\popperJS\cjs\popper-base.min.js" />
+    <Content Include="Content\lib\popperJS\cjs\popper-lite.js" />
+    <Content Include="Content\lib\popperJS\cjs\popper-lite.min.js" />
+    <Content Include="Content\lib\popperJS\cjs\popper.js" />
+    <Content Include="Content\lib\popperJS\cjs\popper.min.js" />
+    <Content Include="Content\lib\popperJS\esm\createPopper.js" />
+    <Content Include="Content\lib\popperJS\esm\createPopper.min.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\contains.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\contains.min.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getBoundingClientRect.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getBoundingClientRect.min.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getClippingRect.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getClippingRect.min.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getCompositeRect.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getCompositeRect.min.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getComputedStyle.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getComputedStyle.min.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getDocumentElement.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getDocumentElement.min.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getDocumentRect.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getDocumentRect.min.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getHTMLElementScroll.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getHTMLElementScroll.min.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getLayoutRect.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getLayoutRect.min.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getNodeName.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getNodeName.min.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getNodeScroll.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getNodeScroll.min.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getOffsetParent.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getOffsetParent.min.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getParentNode.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getParentNode.min.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getScrollParent.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getScrollParent.min.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getViewportRect.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getViewportRect.min.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getWindow.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getWindow.min.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getWindowScroll.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getWindowScroll.min.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getWindowScrollBarX.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\getWindowScrollBarX.min.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\instanceOf.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\instanceOf.min.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\isLayoutViewport.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\isLayoutViewport.min.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\isScrollParent.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\isScrollParent.min.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\isTableElement.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\isTableElement.min.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\listScrollParents.js" />
+    <Content Include="Content\lib\popperJS\esm\dom-utils\listScrollParents.min.js" />
+    <Content Include="Content\lib\popperJS\esm\enums.js" />
+    <Content Include="Content\lib\popperJS\esm\enums.min.js" />
+    <Content Include="Content\lib\popperJS\esm\index.js" />
+    <Content Include="Content\lib\popperJS\esm\index.min.js" />
+    <Content Include="Content\lib\popperJS\esm\modifiers\applyStyles.js" />
+    <Content Include="Content\lib\popperJS\esm\modifiers\applyStyles.min.js" />
+    <Content Include="Content\lib\popperJS\esm\modifiers\arrow.js" />
+    <Content Include="Content\lib\popperJS\esm\modifiers\arrow.min.js" />
+    <Content Include="Content\lib\popperJS\esm\modifiers\computeStyles.js" />
+    <Content Include="Content\lib\popperJS\esm\modifiers\computeStyles.min.js" />
+    <Content Include="Content\lib\popperJS\esm\modifiers\eventListeners.js" />
+    <Content Include="Content\lib\popperJS\esm\modifiers\eventListeners.min.js" />
+    <Content Include="Content\lib\popperJS\esm\modifiers\flip.js" />
+    <Content Include="Content\lib\popperJS\esm\modifiers\flip.min.js" />
+    <Content Include="Content\lib\popperJS\esm\modifiers\hide.js" />
+    <Content Include="Content\lib\popperJS\esm\modifiers\hide.min.js" />
+    <Content Include="Content\lib\popperJS\esm\modifiers\index.js" />
+    <Content Include="Content\lib\popperJS\esm\modifiers\index.min.js" />
+    <Content Include="Content\lib\popperJS\esm\modifiers\offset.js" />
+    <Content Include="Content\lib\popperJS\esm\modifiers\offset.min.js" />
+    <Content Include="Content\lib\popperJS\esm\modifiers\popperOffsets.js" />
+    <Content Include="Content\lib\popperJS\esm\modifiers\popperOffsets.min.js" />
+    <Content Include="Content\lib\popperJS\esm\modifiers\preventOverflow.js" />
+    <Content Include="Content\lib\popperJS\esm\modifiers\preventOverflow.min.js" />
+    <Content Include="Content\lib\popperJS\esm\popper-base.js" />
+    <Content Include="Content\lib\popperJS\esm\popper-base.min.js" />
+    <Content Include="Content\lib\popperJS\esm\popper-lite.js" />
+    <Content Include="Content\lib\popperJS\esm\popper-lite.min.js" />
+    <Content Include="Content\lib\popperJS\esm\popper.js" />
+    <Content Include="Content\lib\popperJS\esm\popper.min.js" />
+    <Content Include="Content\lib\popperJS\esm\types.js" />
+    <Content Include="Content\lib\popperJS\esm\types.min.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\computeAutoPlacement.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\computeAutoPlacement.min.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\computeOffsets.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\computeOffsets.min.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\debounce.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\debounce.min.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\detectOverflow.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\detectOverflow.min.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\expandToHashMap.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\expandToHashMap.min.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\format.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\format.min.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\getAltAxis.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\getAltAxis.min.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\getAltLen.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\getAltLen.min.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\getBasePlacement.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\getBasePlacement.min.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\getFreshSideObject.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\getFreshSideObject.min.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\getMainAxisFromPlacement.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\getMainAxisFromPlacement.min.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\getOppositePlacement.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\getOppositePlacement.min.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\getOppositeVariationPlacement.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\getOppositeVariationPlacement.min.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\getVariation.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\getVariation.min.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\math.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\math.min.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\mergeByName.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\mergeByName.min.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\mergePaddingObject.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\mergePaddingObject.min.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\orderModifiers.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\orderModifiers.min.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\rectToClientRect.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\rectToClientRect.min.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\uniqueBy.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\uniqueBy.min.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\userAgent.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\userAgent.min.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\validateModifiers.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\validateModifiers.min.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\within.js" />
+    <Content Include="Content\lib\popperJS\esm\utils\within.min.js" />
+    <Content Include="Content\lib\popperJS\popper-utils.js" />
+    <Content Include="Content\lib\popperJS\popper-utils.min.js" />
+    <Content Include="Content\lib\popperJS\popper.js" />
+    <Content Include="Content\lib\popperJS\popper.min.js" />
+    <Content Include="Content\lib\popperJS\umd\enums.js" />
+    <Content Include="Content\lib\popperJS\umd\enums.min.js" />
+    <Content Include="Content\lib\popperJS\umd\popper-base.js" />
+    <Content Include="Content\lib\popperJS\umd\popper-base.min.js" />
+    <Content Include="Content\lib\popperJS\umd\popper-lite.js" />
+    <Content Include="Content\lib\popperJS\umd\popper-lite.min.js" />
+    <Content Include="Content\lib\popperJS\umd\popper.js" />
+    <Content Include="Content\lib\popperJS\umd\popper.min.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="libman.json" />
+    <Content Include="Content\lib\jquery\jquery.min.map" />
+    <Content Include="Content\lib\jquery\jquery.slim.min.map" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Content\lib\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Content\lib\bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="Content\lib\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Content\lib\bootstrap\js\bootstrap.js.map" />
+    <Content Include="Content\lib\bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="Content\lib\bootstrap\scss\_alert.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_badge.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_breadcrumb.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_button-group.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_buttons.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_card.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_carousel.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_close.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_code.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_custom-forms.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_dropdown.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_forms.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_functions.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_grid.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_images.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_input-group.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_jumbotron.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_list-group.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_media.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_mixins.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_modal.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_nav.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_navbar.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_pagination.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_popover.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_print.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_progress.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_reboot.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_root.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_spinners.scss" />
+    <Content Include="Content\lib\bootstrap\scss\bootstrap-grid.scss" />
+    <Content Include="Content\lib\bootstrap\scss\bootstrap-reboot.scss" />
+    <Content Include="Content\lib\bootstrap\scss\bootstrap.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_tables.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_toasts.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_tooltip.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_transitions.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_type.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_utilities.scss" />
+    <Content Include="Content\lib\bootstrap\scss\_variables.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_alert.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_background-variant.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_badge.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_border-radius.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_box-shadow.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_breakpoints.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_buttons.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_caret.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_clearfix.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_deprecate.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_float.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_forms.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_gradients.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_grid-framework.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_grid.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_hover.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_image.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_list-group.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_lists.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_nav-divider.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_pagination.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_reset-text.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_resize.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_screen-reader.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_size.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_table-row.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_text-emphasis.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_text-hide.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_text-truncate.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_transition.scss" />
+    <Content Include="Content\lib\bootstrap\scss\mixins\_visibility.scss" />
+    <Content Include="Content\lib\bootstrap\scss\utilities\_align.scss" />
+    <Content Include="Content\lib\bootstrap\scss\utilities\_background.scss" />
+    <Content Include="Content\lib\bootstrap\scss\utilities\_borders.scss" />
+    <Content Include="Content\lib\bootstrap\scss\utilities\_clearfix.scss" />
+    <Content Include="Content\lib\bootstrap\scss\utilities\_display.scss" />
+    <Content Include="Content\lib\bootstrap\scss\utilities\_embed.scss" />
+    <Content Include="Content\lib\bootstrap\scss\utilities\_flex.scss" />
+    <Content Include="Content\lib\bootstrap\scss\utilities\_float.scss" />
+    <Content Include="Content\lib\bootstrap\scss\utilities\_interactions.scss" />
+    <Content Include="Content\lib\bootstrap\scss\utilities\_overflow.scss" />
+    <Content Include="Content\lib\bootstrap\scss\utilities\_position.scss" />
+    <Content Include="Content\lib\bootstrap\scss\utilities\_screenreaders.scss" />
+    <Content Include="Content\lib\bootstrap\scss\utilities\_shadows.scss" />
+    <Content Include="Content\lib\bootstrap\scss\utilities\_sizing.scss" />
+    <Content Include="Content\lib\bootstrap\scss\utilities\_spacing.scss" />
+    <Content Include="Content\lib\bootstrap\scss\utilities\_stretched-link.scss" />
+    <Content Include="Content\lib\bootstrap\scss\utilities\_text.scss" />
+    <Content Include="Content\lib\bootstrap\scss\utilities\_visibility.scss" />
+    <Content Include="Content\lib\bootstrap\scss\vendor\_rfs.scss" />
+    <Content Include="Content\lib\font-awesome\webfonts\fa-brands-400.ttf" />
+    <Content Include="Content\lib\font-awesome\webfonts\fa-brands-400.woff2" />
+    <Content Include="Content\lib\font-awesome\webfonts\fa-regular-400.ttf" />
+    <Content Include="Content\lib\font-awesome\webfonts\fa-regular-400.woff2" />
+    <Content Include="Content\lib\font-awesome\webfonts\fa-solid-900.ttf" />
+    <Content Include="Content\lib\font-awesome\webfonts\fa-solid-900.woff2" />
+    <Content Include="Content\lib\font-awesome\webfonts\fa-v4compatibility.ttf" />
+    <Content Include="Content\lib\font-awesome\webfonts\fa-v4compatibility.woff2" />
+    <Content Include="Content\lib\popperJS\cjs\enums.js.map" />
+    <Content Include="Content\lib\popperJS\cjs\popper-base.js.map" />
+    <Content Include="Content\lib\popperJS\cjs\popper-lite.js.map" />
+    <Content Include="Content\lib\popperJS\cjs\popper.js.map" />
+    <Content Include="Content\lib\popperJS\popper-utils.js.map" />
+    <Content Include="Content\lib\popperJS\popper-utils.min.js.map" />
+    <Content Include="Content\lib\popperJS\popper.js.map" />
+    <Content Include="Content\lib\popperJS\popper.min.js.map" />
+    <Content Include="Content\lib\popperJS\umd\enums.js.map" />
+    <Content Include="Content\lib\popperJS\umd\enums.min.js.map" />
+    <Content Include="Content\lib\popperJS\umd\popper-base.js.map" />
+    <Content Include="Content\lib\popperJS\umd\popper-base.min.js.map" />
+    <Content Include="Content\lib\popperJS\umd\popper-lite.js.map" />
+    <Content Include="Content\lib\popperJS\umd\popper-lite.min.js.map" />
+    <Content Include="Content\lib\popperJS\umd\popper.js.map" />
+    <Content Include="Content\lib\popperJS\umd\popper.min.js.map" />
+    <Content Include="Content\lib\jquery-validation\LICENSE.md" />
+    <Content Include="Content\lib\bootstrap-Multiselect\less\bootstrap-multiselect.less" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Task\Index.cshtml" />
+    <Content Include="Views\Task\CreateTask.cshtml" />
+    <Content Include="Views\Task\ViewTask.cshtml" />
+    <Content Include="Views\MyTasks\Index.cshtml" />
+    <Content Include="Views\MyTasks\ViewTask.cshtml" />
+    <Content Include="Views\Panel\Index.cshtml" />
+    <Content Include="Views\Panel\CreatePanel.cshtml" />
+    <Content Include="Views\Panel\ManagePanel.cshtml" />
+    <Content Include="Views\ScheduledInterview\Index.cshtml" />
+    <Content Include="Views\Shared\_Landing.cshtml" />
+    <Content Include="Views\Landing\Index.cshtml" />
+    <Content Include="Views\Panel\ViewPanel.cshtml" />
+    <Content Include="Views\Task\TransferTask.cshtml" />
+    <Content Include="Views\Interview\Index.cshtml" />
+    <Content Include="Views\Interview\CreateTask.cshtml" />
+    <Content Include="Views\Interview\UpdateScheduleInterview.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Views\Common\" />
+    <Folder Include="Views\InterviewScheduler\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49797</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44323/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

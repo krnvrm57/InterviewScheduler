@@ -1,0 +1,244 @@
+﻿@model InterviewScheduler.Models.PanelModel
+@{
+    ViewBag.Title = "Create Panel";
+}
+<style>
+    .modal-title > input::placeholder {
+        color: white;
+    }
+
+    .modal-title > input {
+        border: none;
+        border-bottom: thin solid white;
+        background: transparent;
+        color: white;
+        border-radius: 2px;
+    }
+
+    .modal-title > .form-control:focus, .modal-title > .single-line:focus, .modal-title > .form-select:focus {
+        border: none;
+        border-bottom: thin solid white;
+        background: transparent;
+        color: white;
+        border-radius: 2px;
+    }
+
+    .twitter-typeahead input {
+        margin-top: 0px;
+    }
+
+    .bootstrap-tagsinput {
+        padding: 0px;
+    }
+
+    input:focus {
+        border: thin groove #009688 !important;
+    }
+
+    .bootstrap-tagsinput .tag {
+        margin-bottom: 4px;
+    }
+</style>
+@{
+    var disableAttr = !Model.AllowEdit ? "disabled=\"disabled\"" : "";
+    <div id="dialog" class="modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog custom-modal   modal-lg" role="document">
+            <div class="modal-content modal-xl">
+                <div class="modal-header">
+                    <div class="modal-title full-width">
+                        Create Panel
+                        <div class="modal-tools">
+                            <i id="expandcollaps" class="fa fa-expand"></i>
+                            <i type="button" class="fa fa-close" data-dismiss="modal" aria-hidden="true" aria-label="Close">
+                            </i>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body" style="">
+                    <form name="PanelForm" id="PanelForm">
+                        <div class="row" id="diverror" style="display:none;">
+                            <div class="col-12">
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <label id="error-msg"></label>
+                                    <a class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 mb-1">
+                                <div class="form-group">
+                                    <label class="form-label required" for="Technology">Panel Name</label>
+                                    <input id="PanelName" name="PanelName" type="text" class="form-control" value="@Model.PanelName" @disableAttr />
+
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mb-1">
+                                <div class="form-group">
+                                    <label class="form-label required" for="Technology">Technology</label>
+                                    <select class="form-control form-select" id="Technology" name="Technology" required>
+                                        <option value="" selected="selected">Select Technology..</option>
+                                        @foreach (var item in Model.TechnologyModel)
+                                        {
+                                            <option value="@item.Id" @(item.Id == Model.TechnologyId ? "selected" : "")>@item.Technology</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mb-1">
+                                <div class="form-group">
+                                    <label class="form-label required" for="Status">Status</label><br />
+                                    <div class="mb-1 form-check">
+                                        <input class="form-check-input" id="StatusA" type="radio" name="Status" value="True" required @(Model.IsActive ? "checked" : "")>
+                                        <label class="form-label mb-0" for="StatusA">Active</label>
+                                    </div>
+                                    <div class="mb-1 form-check">
+                                        <input class="form-check-input" id="StatusI" type="radio" name="Status" value="False" required @(Model.IsActive ? "" : "checked")>
+                                        <label class="form-label mb-0" for="StatusI">Inactive</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+
+                                <div class="form-group">
+                                    <label class="required">Group Employees :</label>
+                                    <input id="Employeesname" name="Employeesname" class="form-control EmployeeName" data-validation="required" />
+                                    @Html.Hidden("hdnSelectedEmpResourceId")
+                                    <a class="AllocatedAssetHistory"></a>
+                                    <div class="text-danger"></div>
+                                </div>
+                            </div>
+                        </div>
+                        @Html.Hidden("panelId", Model.Id)
+                        @Html.Hidden("JsonEmployeeData", Html.Raw(Json.Encode(Model.PannelEmployees)));
+
+                    </form>
+                </div>
+                <div class="modal-footer" style="background:white;">
+                    <div class="text-left d-none">
+                        <b>
+                            <a id="tips" href="#">
+                                Tips <i class="fa fa-info-circle text-right auto-width"> </i>
+                            </a>
+                        </b>
+                    </div>
+                    <div class="text-right">
+
+                        <button id="btnUpdatePanel" class="btn btn-default">Update</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+
+<script src="~/Content/js/Common/CommonMethods.js?v=" @DateTime.Now "></script>
+
+<script>
+    $(document).ready(function () {
+
+        $("#diverror").hide();
+        $("#error-msg").val("");
+        AddTagsAutoComplete("Employeesname", $("#JsonEmployeeData").val());
+        $(".EmployeeName").siblings(".tag_complete_main").find(".tag_input").wrap('<div class="input-group-append"></div>');
+        $('<span class="input-group-text"><i class="fa fa-user" data-toggle="tooltip" data-placement="top" title="Please enter fullname or atleaset first three char to select User Name"></i></label></span>').insertAfter($(".EmployeeName").siblings(".tag_complete_main").find(".tag_input"));
+
+        var _form = $("#PanelForm");
+
+        $(_form).validate({
+            rules: {
+                PanelName: {
+                    required: true,
+                },
+                Technology: {
+                    required: true,
+                },
+                Status: {
+                    required: true,
+                },
+                Employeesname: {
+                    required: true,
+                },
+
+            },
+            messages: {
+                PanelName: 'Required !',
+                Technology: 'Required !',
+                Status: 'Required !',
+                Employeesname: 'Required !',
+
+            },
+            errorElement: 'div',
+            errorClass: 'text-danger',
+            errorPlacement: function (error, element) {
+                if (element.parent().hasClass('input-group')) {
+                    error.insertAfter(element.parent());
+                }
+                else if (element[0].type == "radio") {
+                    debugger;
+                    error.closest("form-group").insertAfter(element.parent());
+                }
+                else {
+                    error.insertAfter(element);
+                }
+
+            },
+        });
+        $("body").on("click", "#btnUpdatePanel", function (e) {
+            debugger;
+            if ($(_form).valid()) {
+                var selectedItem = $(this)[0].id;
+                var _id = selectedItem.split('_')[1];
+                $("#spinner").fadeIn("slow");
+                $.ajax({
+                    type: "POST",
+                    url: "/Panel/CreatePanel",
+                    data: {
+                        panelId: $("#panelId").val(),
+                        PanelName: $("#PanelName").val(),
+                        Technology: $("#Technology").val(),
+                        Status: $("[name='Status']:checked").val(),
+                        Employeesname: $("#Employeesname").val(),
+                    },
+                    dataType: "html",
+                    success: function (response) {
+                        try {
+                            var resultdata = JSON.parse(response)
+                            if (resultdata.Status == Status.Unauthrizedcode) {
+                                window.location.href = url.LoginPageUrl
+                            }
+                            if (resultdata.Status == Status.Failure) {
+                                $("#diverror").show();
+                                $("#error-msg")[0].innerText = resultdata.Message;
+                            }
+                            if (resultdata.Status == Status.Success) {
+                                window.location.href = "/Panel"
+                            }
+                        }
+                        catch (err) { }
+                       
+                    },
+                    failure: function (response) {
+                        var resultdata = JSON.parse(response)
+                        if (resultdata.Status == Status.Failure) {
+                            $("#diverror").show();
+                            $("#error-msg")[0].innerText = resultdata.Message;
+                        }
+                    },
+                    error: function (response) {
+                        var resultdata = JSON.parse(response)
+                        if (resultdata.Status == Status.Failure) {
+                            $("#diverror").show();
+                            $("#error-msg")[0].innerText = resultdata.Message;
+                        }
+                    }
+                });
+                $("#spinner").fadeOut("slow");
+            }
+        });
+    });
+</script>

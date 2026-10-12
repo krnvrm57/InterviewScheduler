@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title -Interview Scheduler</title>
+    <link href="~/Content/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/lib/font-awesome/css/all.min.css" rel="stylesheet" />
+    <link href="~/Content/css/loginPage.css" rel="stylesheet" />
+</head>
+<body class="pace-done">
+    <div id="spinner">
+        <div class="spin"><div id="loader"></div></div>
+    </div>
+    <div id="wrapper">
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            @RenderBody()
+            <div class="footer fixed">
+                <div class="float-right">
+                    <strong> follow us on </strong> <a class="circ"><i class="fab fa-linkedin-in "></i></a> <a class="circ"><i class="fab fa-facebook"></i></a> <a class="circ"><i class="fab fa-twitter"></i></a>
+                </div>
+                <div>
+                    <strong>Copyright</strong> CrimsonLogic <i class="fa fa-copyright"></i> @DateTime.Now.Year.ToString()
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Content/lib/jquery/jquery.min.js"></script>
+    <script src="~/Content/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/Content/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/js/Common/AjaxUnauthrizedHandler.js"></script>
+    <script src="~/Content/js/Common/LoaderHandler.js"></script> 
+    @RenderSection("scripts", required: false)
+</body>
+</html>

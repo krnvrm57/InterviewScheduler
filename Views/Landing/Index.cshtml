@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Landing.cshtml";
+}
+
+@using (Html.BeginForm("login", "Landing", new { ReturnUrl = Request.QueryString["ReturnUrl"] }))
+{
+    <div class="row m-0" style=" height: 93vh;">
+        <div id="loginUsericon">
+            <input type="checkbox" id="loginScreen" style="opacity:0;" />
+            <label for="loginScreen">
+                <span id="spanlogin">Login <i class="fa fa-user-alt"></i></span>
+                <span id="spanClearLogin" style="display:none;"><i class="fa fa-close"></i></span>
+            </label>
+        </div>
+        <div class="col-sm-12 leftSection animation" id="sectionleft">
+            <div class="overlay">
+                <div class="" style="margin-top:20%;">
+                    <div class="row m-auto">
+                        <div class="col-sm-12 text-center">
+                            <h2 class="mb-4"> CrimsonLogic Task Scheduler</h2>
+                            <h4>Mobile first application to Schedule interviews and track the history.</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 RightSection" id="sectionRight" style="display:none;">
+            <div class="" style="margin-top:50%;">
+                <div class="row m-auto">
+                    <div class="col-sm-12 mb-4">
+                        <h3>Login</h3>
+                    </div>
+                    <div class="row m-auto"> </div>
+                    <div class="col-sm-12 ">
+                        <div class="form-group mb-4">
+                            <input id="userName" name="userName" type="text" class="form-control" value="" placeholder="User Name" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 ">
+                        <div class="form-group mb-4">
+                            <input id="Password" name="Password" type="text" class="form-control" value="" placeholder="Password" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row float-right pr-4">
+                    <button class=" btn btn-secondary">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts
+{
+    <script>
+        $("body").on("change", "#loginScreen", function (e) {
+            $("#userName,#Password").val("");
+            if ($("#loginScreen:checked")[0] != undefined) {
+                $("#spanlogin").hide();
+                $("#sectionRight").fadeIn("fast");
+                $("#sectionleft").removeClass("col-sm-12 leftSection animation");
+                $("#sectionleft").addClass("col-sm-8 leftSection  animation");
+                $("#spanClearLogin").show();
+            }
+            else {
+                $("#spanClearLogin").hide();
+                $("#sectionRight").hide("fast");
+                $("#sectionleft").removeClass("col-sm-8 leftSection animation");
+                $("#sectionleft").addClass("col-sm-12 leftSection  animation");
+                $("#spanlogin").show();
+            }
+        });
+
+
+        $(document).ready(function () {
+            var _form = $("form");
+            $(_form).validate({
+                rules: {
+                    userName: {
+                        required: true,
+                    },
+                    Password: {
+                        required: true,
+                    },
+
+                },
+                messages: {
+                    userName: 'Required !',
+                    Password: 'Required !',
+                },
+                errorElement: 'div',
+                errorClass: 'text-danger',
+                errorPlacement: function (error, element) {
+                    if (element.parent().hasClass('input-group')) {
+                        error.insertAfter(element.parent());
+                    }
+                    else if (element[0].type == "radio") {
+                        debugger;
+                        error.closest("form-group").insertAfter(element.parent());
+                    }
+                    else {
+                        error.insertAfter(element);
+                    }
+
+                },
+            });
+        });
+
+    </script>
+}

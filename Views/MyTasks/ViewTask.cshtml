@@ -1,0 +1,472 @@
+﻿@model InterviewScheduler.Models.TaskModel
+@{
+    ViewBag.Title = "View Schedule Interview";
+}
+
+@{
+    var disableAttr = !Model.AllowEdit ? "disabled=\"disabled\"" : "";
+
+
+    <div id="dialog" class="modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog custom-modal   modal-lg" role="document">
+            <div class="modal-content modal-xl">
+                <div class="modal-header">
+                    <div class="modal-title">
+                        Scheduled Task
+                        <div class="modal-tools">
+                            <i id="expandcollaps" class="fa fa-expand"></i>
+                            <i type="button" class="fa fa-close" data-dismiss="modal" aria-hidden="true" aria-label="Close">
+                            </i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-body" style="">
+                    <form id="FormViewUpdateDetails" enctype="multipart/form-data">
+                        <div class="row g-0">
+                            <div class="col-lg-8 pe-lg-2 animation">
+                                <div class="card mb-2 animation">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">Interviewer Details</h5>
+                                    </div>
+                                    <div class="card-body bg-light">
+                                        <div class="row">
+                                            <div class="col-sm-12 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">Title</label>
+                                                    <input id="Title" name="Title" type="text" class="form-control" value="@Model.Title" @disableAttr />
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 ">
+                                                <div class="form-group">
+
+                                                    <label class="form-label">Technology</label>
+                                                    <select class="form-control form-select" id="Technology" name="Technology" @disableAttr>
+                                                        <option value="" selected="selected">Select Technology..</option>
+                                                        @foreach (var item in Model.TechnologyModel)
+                                                        {
+                                                            <option value="@item.Id" @(item.Id == Model.Technology ? "selected" : "")>@item.Technology</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">Position</label>
+                                                    <select class="form-control form-select" id="Technology" name="Technology" @disableAttr>
+                                                        <option value="" selected="selected">Select Technology..</option>
+                                                        @foreach (var item in Model.PositionModel)
+                                                        {
+                                                            <option value="@item.Id" @(item.Id == Model.Position ? "selected" : "")>@item.Position</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">Position</label>
+                                                    <select class="form-control form-select" id="Technology" name="Technology" @disableAttr>
+                                                        <option value="" selected="selected">Select Technology..</option>
+                                                        @foreach (var item in Model.InterviewRoundModel)
+                                                        {
+                                                            <option value="@item.Id" @(item.Id == Model.InterviewRound ? "selected" : "")>@item.InterviewRoundName</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 ">
+
+                                            </div>
+                                            <div class="col-sm-12 mb-1">
+                                                <div class="form-group">
+                                                    <label class="form-label required" for="start-date">Skills Required</label>
+                                                    <div id="divTags"></div>
+                                                    @if (Model.AllowEdit)
+                                                    {
+                                                        <input type="text" class="form-control" id="SkillsRequired" data-role="tagsinput" name="SkillsRequired" value="@Model.SkillsRequired" placeholder="Enter skills here" required />
+                                                    }
+                                                    <input type="hidden" class="form-control" id="hdnSkillsRequired" name="hdnSkillsRequired" value="@Model.SkillsRequired" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="form-label">Description</label>
+                                                    <textarea id="TaskDescription" name="TaskDescription" rows="5" cols="25" class="form-control" @disableAttr>@Model.TaskDescription</textarea>
+                                                </div>
+                                            </div>
+
+                                            @*<div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Suggested @(Model.AllowMultipleSchedule=="Y"? "date's of Interview" : "date of Interview") </label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="@(Model.AllowMultipleSchedule=="Y"?"col-sm-6 animation":"col-sm-12 animation")" id="divInterviewSlot1">
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <input class="form-control" id="InterviewSlot1Date" name="InterviewSlot1Date" type="text" value="@Model.InterviewSlot1Date.ToString("dd/MM/yyyy")" placeholder="--/--/--">
+                                                                    <span class="input-group-text fa fa-calendar-check"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+
+                                                                <label class="form-label required" for="start-time">Start Time</label>
+                                                                <div class="input-group">
+                                                                    <input class="form-control " id="InterviewSlot1StartTime" name="InterviewSlot1StartTime" value="@Model.InterviewSlot1StartTime" type="text" placeholder="--:-- am/pm">
+                                                                    <span class="input-group-text fa fa-clock"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label required" for="end-date">End Time</label>
+                                                                <div class="input-group">
+                                                                    <input class="form-control " id="InterviewSlot1EndTime" name="InterviewSlot1EndTime" value="@Model.InterviewSlot1EndTime" type="text" placeholder="--:-- am/pm">
+                                                                    <span class="input-group-text fa fa-clock"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6" id="divInterviewSlot2" style="@(Model.AllowMultipleSchedule=="Y"?"border-left: thin double gray;":"display:none;")">
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <input class="form-control" id="InterviewSlot2Date" name="InterviewSlot2Date" value="@Model.InterviewSlot2Date.ToString("dd/MM/yyyy")" type="text" placeholder="--/--/--">
+                                                                    <span class="input-group-text fa fa-calendar-check"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label required" for="start-time">Start Time</label>
+                                                                <div class="input-group">
+                                                                    <input class="form-control " id="InterviewSlot2StartTime" name="InterviewSlot2StartTime" value="@Model.InterviewSlot2StartTime" type="text" placeholder="--:-- am/pm">
+                                                                    <span class="input-group-text fa fa-clock"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label required" for="end-date">End Time</label>
+                                                                <div class="input-group">
+                                                                    <input class="form-control " id="InterviewSlot2EndTime" name="InterviewSlot2EndTime" value="@Model.InterviewSlot2EndTime" type="text" placeholder="--:-- am/pm">
+                                                                    <span class="input-group-text fa fa-clock"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>*@
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @if (!Model.AllowEdit && Model.SuggestedInterviewSlotsModel != null && Model.SuggestedInterviewSlotsModel.Count > 0)
+                                {
+                                    <div class="card mb-2 animation">
+                                        <div class="card-header">
+                                            <h5 class="mb-0">Slots suggested by Interviewer's</h5>
+                                        </div>
+                                        <div class="card-body bg-light">
+                                            <div class="form-group table table-striped table-bordered ">
+                                                @foreach (var AllocatedToemployee in Model.SuggestedInterviewSlotsModel.Select(x => x.AllocatedToEmployee).Distinct().ToList())
+                                                {
+                                                    <div class=" row ">
+                                                        <div class="col-sm-4 m-auto">@Model.SuggestedInterviewSlotsModel.Where(x => x.AllocatedToEmployee == AllocatedToemployee).FirstOrDefault().FullName</div>
+                                                        <div class="col-sm-8">
+                                                            @foreach (var item in Model.SuggestedInterviewSlotsModel.Where(x => x.AllocatedToEmployee == AllocatedToemployee).ToList())
+                                                            {
+                                                                <div class="row inner-border-left">
+                                                                    <div class="col-sm-12 pointer-event " data-toggle="tooltip" data-html="true" title="<b>@item.InterviewSlotDate.Value.ToString("dd/MMM/yyyy") <br>from @item.InterviewSlotStartTime to @item.InterviewSlotEndTime</b>">@item.InterviewSlotDate.Value.ToString("dd/MM/yyyy") from @item.InterviewSlotStartTime to @item.InterviewSlotEndTime</div>
+                                                                </div>
+                                                            }
+                                                        </div>
+                                                    </div>
+
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <div class="col-lg-4 ps-lg-2 ">
+                                <div class="sticky-sidebar">
+                                    <div class="card animation">
+                                        <div class="card-header">
+                                            <h5 class="mb-0">Candidate Info</h5>
+                                        </div>
+                                        <div class="card-body bg-light">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="event-type">Candidate Name</label>
+                                                        <input class="form-control" id="CandidateName" name="CandidateName" type="text" value="@Model.CandidateProfileModel.CandidateName" placeholder="Enter Title here" @disableAttr>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="event-topic">Gender</label><br />
+                                                        <div class=" form-check">
+                                                            <input class="form-check-input" id="CandidateM" type="radio" name="CandidateGender" value="Male" @(Model.CandidateProfileModel.CandidateGender == "Male" ? "checked" : "") @disableAttr>
+                                                            <label class="form-label mb-0" for="CandidateM">Male</label>
+                                                        </div>
+                                                        <div class=" form-check">
+                                                            <input class="form-check-input" id="CandidateF" type="radio" name="CandidateGender" value="Female" @(Model.CandidateProfileModel.CandidateGender == "Female" ? "checked" : "") @disableAttr>
+                                                            <label class="form-label mb-0" for="CandidateF">Female</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="event-type">Email Id</label>
+                                                        <input class="form-control" id="EmailId" name="EmailId" type="text" value="@Model.CandidateProfileModel.EmailId" placeholder="Enter Email Id here" @disableAttr>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="event-type">Phone No</label>
+                                                        <input class="form-control" id="PhoneNumber" name="PhoneNumber" type="text" value="@Model.CandidateProfileModel.PhoneNumber" placeholder="Enter Phone number here" @disableAttr>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label">Resume</label>
+                                                        <div class="form-control" style="padding: 2rem .5rem 4rem .5rem;">
+                                                            <div class="row DownloadFile" id="@Model.CandidateProfileModel.DocumentId">
+                                                                <div class="col-sm-3">
+                                                                    <i class="fa fa-download fa-2x"></i>
+                                                                </div>
+                                                                <div class="col-sm-9">
+                                                                    <i class="pl-2">@Model.CandidateProfileModel.DocTitle</i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-lg-12">
+                                @if (Model.AllowAction)
+                                {
+                                    var html = "";
+                                    <div class="card animation" style="">
+                                        <div class="card-header">
+                                            <h5 class="mb-0">
+                                                Action
+
+                                                @if (Model.SuggestedInterviewSlotsModel != null && Model.SuggestedInterviewSlotsModel.Count > 0)
+                                                {
+                                                    html = html + "<div class=\"row table\" style=\"color:white;\">";
+                                                    foreach (var AllocatedToemployee in Model.SuggestedInterviewSlotsModel.Select(x => x.AllocatedToEmployee).Distinct().ToList())
+                                                    {
+
+                                                        html = html + "<div class=\"col-sm-4\">" + Model.SuggestedInterviewSlotsModel.Where(x => x.AllocatedToEmployee == AllocatedToemployee).FirstOrDefault().FullName
+                                                         + "</div><div class=\"col-sm-8\">";
+                                                        foreach (var item in Model.SuggestedInterviewSlotsModel.Where(x => x.AllocatedToEmployee == AllocatedToemployee).ToList())
+                                                        {
+                                                            var todisplay = @item.InterviewSlotDate.Value.ToString("dd/MM/yyyy") + " from" + @item.InterviewSlotStartTime + " to" + @item.InterviewSlotEndTime;
+                                                            html = html + @todisplay;
+                                                        }
+                                                        html = html + "</div>";
+                                                    }
+                                                    html = html + "</div>";
+                                                }
+                                                <i id="infoAction" class="fa fa-info-circle" data-toggle="tooltip" data-html="true" title="@html">  </i>
+                                            </h5>
+                                        </div>
+                                        <div class="card-body bg-light animation">
+                                            <div class="row">
+                                                <div class="col-sm-12 mb-1">
+                                                    <label class="form-label required">Date of Interview</label>
+                                                    <select class="form-control" id="TaskAction" name="TaskAction" required>
+                                                        <option>Select action for Task--</option>
+                                                        @foreach (var itemaction in Model.Action)
+                                                        {
+                                                            <option value="@itemaction.StateId">@itemaction.StartDescription_EN</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group-inner" id="SuggestSection" style="display:none;">
+                                                <div class="col-sm-12 mb-1">
+                                                    <label class="form-label required">Date of Interview</label>
+                                                    <br />
+                                                    <div class="form-check custom-checkbox  form-check">
+                                                        <input class="form-check-input" id="AllowMultipleSchedule" type="checkbox" name="AllowMultipleSchedule" value="Y">
+                                                        <label class="form-label mb-0" for="AllowMultipleSchedule"> <strong>Allow multiple schedules</strong></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 mb-1 animation" id="divInterviewSlot1">
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-prepend">On Date</span>
+                                                                    <input class="form-control datepicker" id="SuggestedSlotDate1" name="SuggestedSlotDate1" type="text" placeholder="--/--/--" required>
+                                                                    <span class="input-group-text fa fa-calendar-check"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group  form-inline">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-prepend">From</span>
+                                                                    <input class="form-control timepicker " id="SuggestedStartTime1" name="SuggestedStartTime1" type="text" placeholder="--:-- am/pm" required>
+                                                                    <span class="input-group-text fa fa-clock"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group form-inline">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-prepend">To</span>
+                                                                    <input class="form-control timepicker " id="SuggestedEndTime1" name="SuggestedEndTime1" type="text" placeholder="--:-- am/pm" required>
+                                                                    <span class="input-group-text fa fa-clock"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 mb-1 animation" id="divInterviewSlot2" style="display:none; border-left: thin double gray;">
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-prepend">On Date</span>
+                                                                    <input class="form-control datepicker" id="SuggestedSlotDate2" name="SuggestedSlotDate2" type="text" placeholder="--/--/--" required>
+                                                                    <span class="input-group-text fa fa-calendar-check"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group  form-inline">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-prepend">From</span>
+                                                                    <input class="form-control timepicker " id="SuggestedStartTime2" name="SuggestedStartTime2" type="text" placeholder="--:-- am/pm" required>
+                                                                    <span class="input-group-text fa fa-clock"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group form-inline">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-prepend">To</span>
+                                                                    <input class="form-control timepicker " id="SuggestedEndTime2" name="SuggestedEndTime2" type="text" placeholder="--:-- am/pm" required>
+                                                                    <span class="input-group-text fa fa-clock"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group-inner" id="CommentSection" style="display:none;">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Comments</label>
+                                                        <textarea id="TaskDescription" name="TaskDescription" rows="5" cols="25" class="form-control">@Model.Comments</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        @Html.Hidden("Id", Model.Id)
+                        @Html.Hidden("AllowEdit", Model.AllowEdit)
+                    </form>
+                </div>
+                <div class="modal-footer" style="background:white;">
+                    <div class="text-left d-none">
+                        <b>
+                            <a id="tips" href="#">
+                                Tips <i class="fa fa-info-circle text-right auto-width"> </i>
+                            </a>
+                        </b>
+                    </div>
+                    <div class="text-right">
+                        @if (Model.AllowAction)
+                        {
+                            <button id="btnSaveTaskResponse" class="btn btn-default">Submit</button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+@if (Model.AllowEdit)
+{
+    <script src="~/Content/js/App/MyTask/ActionOnTask.js?v=@DateTime.Now"></script>
+    <script src="~/Content/js/Common/DragDropUI.js?v=@DateTime.Now"></script>
+
+}
+else
+{
+    <script>
+        $("input").attr("disabled", "disabled");
+    </script>
+}
+
+<script>
+
+    $(document).ready(function () {
+        $("body").on("click", ".DownloadFile", function (e) {
+            var DocumentId = $(this)[0].id;
+            var url = "/common/DownloadDocument?DocumentId=" + DocumentId;
+            window.location.href = url;
+        });
+
+        $.ajax({
+            url: "/Common/GetSkills",
+            data: {
+                "RequestString": null
+            },
+            type: "Get",
+            contentType: "json",
+            success: function (data) {
+                try {
+                    if (data.Status == Status.Unauthrizedcode) {
+                        window.location.href = url.LoginPageUrl
+                    }
+                }
+                catch (err) {
+                }
+                if (data.length > 0) {
+
+                    var _allowEdit = $("#AllowEdit").val();
+                    var _Remove = "";
+                    if (_allowEdit == "True") {
+                        _Remove = "remove";
+                    }
+                    debugger;
+                    console.log(data);
+                    var _text = "<div class=\"bootstrap-tagsinput\">";
+                    $.each($("#hdnSkillsRequired").val().split(','), function (i, item) {
+                        _text = _text + "<span class=\"tag label label-info\">" + (data.filter(x => x.Id == item))[0].Name + "<span data-role=\"" + _Remove + "\"></span></span>";
+                    });
+                    _text = _text + "</div>"
+                }
+                $("#divTags").append(_text);
+            },
+            error: function (response) {
+                console.log(response.responseText);
+            },
+            failure: function (response) {
+                console.log(response.responseText);
+            }
+        });
+    });
+</script>

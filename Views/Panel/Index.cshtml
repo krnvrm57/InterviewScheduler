@@ -1,0 +1,40 @@
+﻿
+<div class="border-bottom white-bg dashboard-header mb-1 headerborder">
+    <h4>Panel</h4>
+</div>
+<div class="border-bottom white-bg dashboard-header mb-5">
+    <div class="row">
+        <div class="col-sm-6 mb-3">
+            <a id="btnAddNewPanel" href="#" onclick="return false;" class="btn btn-secondary">Create Interview Panel</a>
+        </div>
+        <div class="col-sm-6 mb-3 text-right">
+            <a id="infoIcon" class="fa fa-circle-info fa-2x"></a>
+        </div>
+        <div class="col-sm-12">
+            <table id="PanelDetails" class="display table table-striped">
+                <thead>
+                    <tr>
+                        <th>SN</th>
+                        <th>Panel Name</th>
+                        <th>Technology Name</th>
+                        <th>Employees in Panel</th>
+                        <th>CreatedBy</th>
+                        <th>CreatedDate</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            </table>
+            <div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="PanelModal"></div>
+@section scripts
+{
+    <script src="~/Content/js/App/Panel/Panel.js?v=@DateTime.Now"></script>
+
+
+
+}
+
